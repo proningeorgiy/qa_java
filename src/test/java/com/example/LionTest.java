@@ -15,7 +15,6 @@ public class LionTest {
     private final boolean hasMane;
 
     Feline feline = Mockito.mock(Feline.class);
-    ;
 
     public LionTest(String sex, boolean hasMane) {
         this.sex = sex;
@@ -33,7 +32,7 @@ public class LionTest {
 
     @Test
     public void getKittens() throws Exception {
-        Lion lion = new Lion("Самец", feline);
+        Lion lion = new Lion(sex, feline);
         lion.getKittens();
 
         Mockito.verify(feline).getKittens();
@@ -48,14 +47,17 @@ public class LionTest {
 
     @Test
     public void getFood() throws Exception {
-        Lion lion = new Lion("Самец", feline);
+        Lion lion = new Lion(sex, feline);
         lion.getFood();
 
         Mockito.verify(feline).getFood("Хищник");
     }
 
     @Test
-    public void wrongSex() throws Exception {
-        assertThrows(Exception.class, () -> new Lion("Транс", feline));
+    public void notMaleFemaleException() throws Exception {
+
+        Exception thrown = assertThrows(Exception.class, () -> new Lion("Транс", feline));
+
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", thrown.getMessage());
     }
 }
