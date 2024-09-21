@@ -22,7 +22,7 @@ public class LionParameterizedTest {
 
 
     @Parameterized.Parameters
-    public static Object[][] FAQs() {
+    public static Object[][] Genders() {
         return new Object[][]{
                 {"Самец", true},
                 {"Самка", false},
